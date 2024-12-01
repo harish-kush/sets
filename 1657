@@ -1,0 +1,34 @@
+class Solution {
+public:
+    bool closeStrings(string str1, string str2) {
+        if(str1.size()!=str2.size()) return false;
+        unordered_map<char,int>m1;
+        unordered_map<char,int>m2;
+        for(auto ele : str1){
+            m1[ele]++;
+        }
+        for(auto ele : str2){
+            m2[ele]++;
+        }
+         for(auto x : m1){
+            char ch = x.first;
+            if(m2.find(ch)==m2.end()) return false;
+        }
+        unordered_map<int,int>n1;
+        unordered_map<int,int>n2;
+        for(auto x : m1){
+            int f1 = x.second;
+            n1[f1]++;
+        }
+        for(auto y : m2){
+            int f2 = y.second;
+            n2[f2]++;
+        }
+        for(auto x : n1){
+            int key = x.first;
+            if(n2.find(key)==n2.end()) return false;
+            if(n2[key]!=n1[key]) return false;
+        }
+        return true;
+    }
+};
